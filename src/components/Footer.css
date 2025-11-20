@@ -1,0 +1,166 @@
+/* Simple, clean footer styles. Tweak colors to match your site theme. */
+
+.footer {
+  background: #0f172a; /* deep navy */
+  color: #e6eef8;
+  padding: 36px 16px;
+  font-family: 'Inter', sans-serif;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+/* layout */
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+  align-items: start;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-section h4 {
+  margin: 0 0 12px 0;
+  color: #f1f5f9;
+  font-size: 16px;
+}
+
+/* Brand area */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+.footer-logo:focus {
+  outline: 3px solid rgba(99,102,241,0.12);
+  border-radius: 8px;
+}
+
+.logo-icon {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #06b6d4, #6366f1);
+  color: white;
+  font-family: 'Poppins', sans-serif;
+}
+
+.logo-text {
+  font-weight: 700;
+  color: #f8fafc;
+  font-size: 18px;
+}
+.logo-subtitle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Description */
+.footer-description {
+  margin: 0;
+  color: rgba(230,238,248,0.9);
+  max-width: 420px;
+  line-height: 1.5;
+  font-size: 14px;
+}
+
+/* Quick links */
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.footer-link {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 6px 8px;
+  color: rgba(230,238,248,0.9);
+  cursor: pointer;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.footer-link:hover,
+.footer-link:focus {
+  background: rgba(255,255,255,0.03);
+  outline: none;
+}
+
+/* Social links */
+.social-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.social-link {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #0f172a;
+  background: rgba(255,255,255,0.9);
+}
+.social-link.youtube {
+  background: linear-gradient(90deg,#ff0000,#e53935);
+  color: white;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.12);
+}
+
+/* contact email */
+.contact-email {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(230,238,248,0.85);
+}
+.contact-email a {
+  color: #a5b4fc;
+  text-decoration: underline;
+}
+
+/* footer bottom */
+.footer-bottom {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0 0 0;
+}
+.footer-legal {
+  display: flex;
+  gap: 12px;
+}
+.legal-link {
+  color: rgba(230,238,248,0.88);
+  text-decoration: none;
+  font-size: 13px;
+}
+.legal-link:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media (min-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr 220px 260px;
+  }
+  .footer-description {
+    max-width: none;
+  }
+}
