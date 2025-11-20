@@ -107,7 +107,7 @@ const Footer = ({ onPageChange = () => {} }) => {
 
           <p className="contact-email" aria-hidden="false">
             Got questions?<br />
-            <a href="mailto:contact@coreengineershub.com">contact@coreengineershub.com</a>
+            <a href="mailto:contact@coreengineershub.com">reach.souvick@gmail.com</a>
           </p>
         </div>
       </div>
