@@ -55,7 +55,7 @@ const Home = ({ onPageChange }) => {
           <div className="hero-content">
             <div className="badge">
               <span>⭐</span>
-              Trusted by 10,000+ Engineering Students
+              Trusted by 100+ Engineering Students
             </div>
             
             <h1 className="hero-title">
