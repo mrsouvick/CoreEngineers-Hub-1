@@ -41,10 +41,10 @@ const Home = ({ onPageChange }) => {
   ];
 
   const stats = [
-    { number: '500+', label: 'Study Materials' },
+    { number: '50+', label: 'Study Materials' },
     { number: '50+', label: 'Video Tutorials' },
-    { number: '10k+', label: 'Students Helped' },
-    { number: '5+', label: 'Engineering Branches' }
+    { number: '100+', label: 'Students Helped' },
+    { number: '3+', label: 'Engineering Branches' }
   ];
 
   return (
