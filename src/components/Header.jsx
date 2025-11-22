@@ -61,7 +61,7 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
   ];
 
   const handleNavClick = (value) => {
-    onPageChange(value);
+    try { onPageChange(value); } catch (e) {}
     setMobileMenuOpen(false);
   };
 
@@ -73,7 +73,7 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
           role="button"
           tabIndex={0}
           onClick={() => handleNavClick('home')}
-          onKeyDown={(e) => e.key === 'Enter' && handleNavClick('home')}
+          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleNavClick('home')}
           aria-label="CoreEngineers - go to home"
         >
           <img className="logo-img" src="/assets/logo.png" alt="CoreEngineers logo" />
@@ -113,9 +113,7 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
           aria-controls="mobile-menu"
           aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
         >
-          <span aria-hidden="true" className="mobile-menu-icon">
-            {mobileMenuOpen ? '✕' : '☰'}
-          </span>
+          <span aria-hidden="true" className="mobile-menu-icon">{mobileMenuOpen ? '✕' : '☰'}</span>
         </button>
       </div>
 
@@ -128,7 +126,6 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
                   key={item.value}
                   onClick={() => handleNavClick(item.value)}
                   className={`mobile-nav-link ${currentPage === item.value ? 'active' : ''}`}
-                  aria-current={currentPage === item.value ? 'page' : undefined}
                 >
                   {item.name}
                 </button>

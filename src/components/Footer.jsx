@@ -12,11 +12,7 @@ const Footer = ({ onPageChange = () => {} }) => {
   ];
 
   const handleNavigate = (value) => {
-    try {
-      onPageChange(value);
-    } catch (err) {
-      // ignore
-    }
+    try { onPageChange(value); } catch (e) {}
     if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -24,12 +20,7 @@ const Footer = ({ onPageChange = () => {} }) => {
     <footer className="footer" aria-labelledby="footer-heading">
       <div className="container footer-content">
         <div className="footer-brand">
-          <button
-            className="footer-logo"
-            onClick={() => handleNavigate('home')}
-            aria-label="Go to home"
-            type="button"
-          >
+          <button className="footer-logo" onClick={() => handleNavigate('home')} type="button" aria-label="Go to home">
             <img src="/assets/logo.png" alt="CoreEngineers logo" className="footer-logo-img" />
             <div className="footer-logo-text">
               <span className="brand-name">CoreEngineers</span>
@@ -38,23 +29,21 @@ const Footer = ({ onPageChange = () => {} }) => {
           </button>
 
           <p className="footer-description">
-            Clear, practical study notes and project guides for engineering students. Free resources,
-            concise explanations, and hands-on examples to help you build skills fast.
+            Clear, practical study notes and project guides for engineering students. Free resources, concise explanations, and hands-on examples.
           </p>
 
           <form
             className="newsletter"
             onSubmit={(e) => {
               e.preventDefault();
-              const email = e.target.elements.email.value.trim();
+              const email = e.target.elements.email?.value?.trim();
               if (!email) return;
-              // lightweight UX: just clear field (integration point for API)
               e.target.reset();
               alert('Thanks — subscription recorded (demo).');
             }}
             aria-label="Subscribe to newsletter"
           >
-            <label htmlFor="footer-email" className="visually-hidden">Email address</label>
+            <label htmlFor="footer-email" className="visually-hidden">Email</label>
             <input id="footer-email" name="email" type="email" placeholder="Your email" className="newsletter-input" />
             <button type="submit" className="newsletter-btn">Subscribe</button>
           </form>
@@ -64,12 +53,7 @@ const Footer = ({ onPageChange = () => {} }) => {
           <h4 id="footer-links" className="footer-heading">Quick links</h4>
           <nav className="footer-links" aria-label="Footer navigation">
             {quickLinks.map((link) => (
-              <button
-                key={link.value}
-                type="button"
-                className="footer-link"
-                onClick={() => handleNavigate(link.value)}
-              >
+              <button key={link.value} type="button" className="footer-link" onClick={() => handleNavigate(link.value)}>
                 {link.label}
               </button>
             ))}
@@ -81,7 +65,7 @@ const Footer = ({ onPageChange = () => {} }) => {
 
           <div className="social-row" role="list" aria-label="Social links">
             <a className="social social-youtube" href="https://youtube.com/@CoreEngineersHub" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="YouTube">
-              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" className="social-icon"><path d="M23 7s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C16.8 3 12 3 12 3s-4.8 0-7.9.7c-.4.1-1.3.1-2.1 1C1.2 5.4 1 7 1 7S0.8 9.1.8 11.2v1.6C.8 15.9 1 18 1 18s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.8.3 7 .7 7 .7s4.8 0 7.9-.7c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-2.1.2-4.3v-1.6C23.2 9.1 23 7 23 7z" /><path d="M9.5 15.2V8.8l6.1 3.2-6.1 3.2z" /></svg>
+              <svg viewBox="0 0 24 24" aria-hidden="true" className="social-icon"><path d="M23 7s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C16.8 3 12 3 12 3s-4.8 0-7.9.7c-.4.1-1.3.1-2.1 1C1.2 5.4 1 7 1 7S0.8 9.1.8 11.2v1.6C.8 15.9 1 18 1 18s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.8.3 7 .7 7 .7s4.8 0 7.9-.7c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-2.1.2-4.3v-1.6C23.2 9.1 23 7 23 7z" /><path d="M9.5 15.2V8.8l6.1 3.2-6.1 3.2z" /></svg>
               <span className="social-label">YouTube</span>
             </a>
 
