@@ -11,34 +11,34 @@ import './About.css';
 const About = () => {
   const team = [
     {
-      name: 'Alex Johnson',
-      role: 'Founder & Lead Educator',
+      name: 'Souvick Kumar Halder',
+      role: 'Admin',
       description:
-        'Senior Software Engineer with 8+ years of experience and a passion for teaching practical engineering concepts.',
-      avatar: 'https://images.pexels.com/photos/1438081/pexels-photo-1438081.jpeg',
+        'Manage whole things.',
+      avatar: 'https://www.facebook.com/photo/?fbid=1788689401732329&set=a.107634799837806',
       emoji: '👨‍💻',
     },
     {
-      name: 'Sarah Chen',
-      role: 'Content Director',
+      name: 'Surajit Ghsoh',
+      role: 'Content Creator',
       description:
         'Curriculum expert who designs clear, exam-focused and project-driven learning materials.',
-      avatar: '/mnt/data/04dec392-a8e7-464d-a024-6ece30b7e88a.png',
+      avatar: 'https://www.facebook.com/photo/?fbid=961635126159564&set=a.105478485108570',
       emoji: '👩‍🏫',
     },
     {
-      name: 'Mike Rodriguez',
-      role: 'Technical Advisor',
+      name: 'Tanmay Maity',
+      role: 'Content Creator',
       description:
-        'Electronics researcher who makes advanced topics approachable through examples and labs.',
-      avatar: '/mnt/data/04dec392-a8e7-464d-a024-6ece30b7e88a.png',
+        'Semester Notes & Lectures Expert.',
+      avatar: '',
       emoji: '👨‍🔬',
     },
     {
-      name: 'Priya Patel',
-      role: 'Community Manager',
+      name: 'Sribas Adak',
+      role: 'Graphics Designer & Editor',
       description:
-        'Community builder focused on mentoring, peer-learning groups, and live sessions.',
+        'Design awsome materials',
       avatar: '/mnt/data/04dec392-a8e7-464d-a024-6ece30b7e88a.png',
       emoji: '👩‍💼',
     },
