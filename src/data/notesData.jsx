@@ -23,23 +23,23 @@ export const notesData = [
   // ECE entry with thumbnail (uses uploaded image from project files)
   {
     id: 2,
-    title: "Analog Electronics - Lecture Notes",
+    title: "Digital Signal Processing-Suggestion",
     branch: "ECE",
-    semester: "3",
-    subject: "Analog Electronics",
+    semester: "5",
+    subject: "Digital Signal Processing",
     description:
-      "Clear and concise lecture notes on diodes, transistors, amplifier basics, and small-signal models. Includes solved examples and practice problems for semester exams.",
-    tags: ["electronics", "analog", "transistors", "amplifiers"],
-    fileSize: "3.10 MB",
-    downloadUrl: "#",
-    previewUrl: "#",
+      "Clear and concise suggestion for semester exams.",
+    tags: ["electronics", "digital", "dsp", "amplifiers"],
+    fileSize: "635KB",
+    downloadUrl: "https://drive.google.com/file/d/1ka58ERoqyCRB5o1f9PBCrJkSqAMYpOE6/view?usp=drive_link",
+    previewUrl: "https://drive.google.com/file/d/1ka58ERoqyCRB5o1f9PBCrJkSqAMYpOE6/view?usp=drive_link",
     // local file path (use this path as url in your app / build setup)
-    thumbnail: "/mnt/data/04dec392-a8e7-464d-a024-6ece30b7e88a.png",
-    uploadedBy: "CoreEngineers Team",
-    views: 860,
-    downloadCount: 420,
+    thumbnail: "https://cdn.slidesharecdn.com/ss_thumbnails/digitalsignalprocessing-200628160007-thumbnail.jpg?width=640&height=640&fit=bounds",
+    uploadedBy: "CoreEngineers-Hub Team",
+    views: 53,
+    downloadCount: 20,
     rating: 4.6,
-    lastUpdated: "2024-03-02",
+    lastUpdated: "2022-11-22",
   },
 
   // EE entry with thumbnail (re-using the same uploaded image; replace with EE-specific image later if available)
