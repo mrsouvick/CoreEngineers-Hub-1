@@ -7,7 +7,6 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
   const mobileMenuRef = useRef(null);
   const mobileBtnRef = useRef(null);
 
-  // Handle scroll state
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
     handleScroll();
@@ -15,17 +14,18 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menu on Escape and manage focus when menu opens
   useEffect(() => {
     const onKeyDown = (e) => {
-      if (e.key === 'Escape' && mobileMenuOpen) {
-        setMobileMenuOpen(false);
-        mobileBtnRef.current?.focus();
-      }
+      if (e.key === 'Escape') setMobileMenuOpen(false);
     };
 
     const onClickOutside = (e) => {
-      if (mobileMenuOpen && mobileMenuRef.current && !mobileMenuRef.current.contains(e.target) && !mobileBtnRef.current?.contains(e.target)) {
+      if (
+        mobileMenuOpen &&
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(e.target) &&
+        !mobileBtnRef.current?.contains(e.target)
+      ) {
         setMobileMenuOpen(false);
       }
     };
@@ -33,7 +33,6 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
     if (mobileMenuOpen) {
       document.addEventListener('keydown', onKeyDown);
       document.addEventListener('click', onClickOutside);
-      // Prevent body scroll on mobile when menu open
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = '';
@@ -46,28 +45,24 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
     };
   }, [mobileMenuOpen]);
 
-  // Close mobile menu when resizing to large screens
   useEffect(() => {
     const onResize = () => {
-      if (window.innerWidth >= 768 && mobileMenuOpen) {
-        setMobileMenuOpen(false);
-      }
+      if (window.innerWidth >= 768) setMobileMenuOpen(false);
     };
     window.addEventListener('resize', onResize);
     return () => window.removeEventListener('resize', onResize);
-  }, [mobileMenuOpen]);
+  }, []);
 
   const navigation = [
     { name: 'Home', value: 'home' },
     { name: 'Notes Library', value: 'notes' },
     { name: 'About', value: 'about' },
-    { name: 'Contact', value: 'contact' },
+    { name: 'Contact', value: 'contact' }
   ];
 
   const handleNavClick = (value) => {
     onPageChange(value);
-    // close mobile menu if open
-    if (mobileMenuOpen) setMobileMenuOpen(false);
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -77,11 +72,11 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
           className="logo"
           role="button"
           tabIndex={0}
-          aria-label="CoreEngineers - go to home"
           onClick={() => handleNavClick('home')}
           onKeyDown={(e) => e.key === 'Enter' && handleNavClick('home')}
+          aria-label="CoreEngineers - go to home"
         >
-          <div className="logo-icon" aria-hidden="true">CE</div>
+          <img className="logo-img" src="/assets/logo.png" alt="CoreEngineers logo" />
           <span className="logo-text">CoreEngineers</span>
         </div>
 
