@@ -2,22 +2,22 @@
 export const notesData = [
   {
     id: 1,
-    title: "Data Structures and Algorithms Complete Guide",
+    title: "Physics Organizer for 1st sem students",
     branch: "CSE",
-    semester: "3",
-    subject: "Data Structures",
+    semester: "1",
+    subject: "Physics Organizer",
     description:
-      "Comprehensive guide covering arrays, linked lists, trees, graphs, and sorting algorithms with examples and complexity analysis. Perfect for interview preparation and academic excellence.",
-    tags: ["programming", "algorithms", "data-structures", "complexity", "interview"],
-    fileSize: "2.45 MB",
-    downloadUrl: "#",
-    previewUrl: "#",
-    thumbnail: "", // optional: add path to CSE thumbnail if you have one
+      "1st Sem Physics Organizer for CSE Students and Specilization",
+    tags: ["Physics", "Makaut", "Organizer", "1st sem", "cse"],
+    fileSize: "46.2 MB",
+    downloadUrl: "https://drive.google.com/file/d/1TjoPAXBTAQTxBnSJ2EUb2_EpXKqaACTY/view?usp=sharing",
+    previewUrl: "https://drive.google.com/file/d/1TjoPAXBTAQTxBnSJ2EUb2_EpXKqaACTY/view?usp=sharing",
+    thumbnail: "public/assets/Physics_orgzr-thmb.png", // optional: add path to CSE thumbnail if you have one
     uploadedBy: "CoreEngineers Team",
-    views: 1250,
-    downloadCount: 890,
+    views: 12,
+    downloadCount: 8,
     rating: 4.8,
-    lastUpdated: "2024-01-15",
+    lastUpdated: "2025-11-25",
   },
 
   // ECE entry with thumbnail (uses uploaded image from project files)
