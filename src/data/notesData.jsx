@@ -48,8 +48,8 @@ export const notesData = [
       "1st Sem BEE Organizer for CSE Students and Specilization",
     tags: ["Basic electrical", "Makaut", "Organizer", "1st sem", "cse"],
     fileSize: "56.2 MB",
-    downloadUrl: "https://drive.google.com/drive/folders/1HapBbTChxd2Zx6XEXEkfn42nHeE7UE3Q",
-    previewUrl: "https://drive.google.com/drive/folders/1HapBbTChxd2Zx6XEXEkfn42nHeE7UE3Q",
+    downloadUrl: "https://drive.google.com/drive/folders/1jKh2LWEOBkwK5Xbmtkua4Yrf6dNgFwBB?usp=sharing",
+    previewUrl: "https://drive.google.com/drive/folders/1jKh2LWEOBkwK5Xbmtkua4Yrf6dNgFwBB?usp=sharing",
     thumbnail: "", // optional: add path to CSE thumbnail if you have one
     uploadedBy: "CoreEngineers Team",
     views: 12,
