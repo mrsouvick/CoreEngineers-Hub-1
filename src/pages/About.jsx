@@ -15,7 +15,7 @@ const About = () => {
       role: 'Admin',
       description:
         'Manage whole things.',
-      avatar: 'https://www.facebook.com/photo/?fbid=1788689401732329&set=a.107634799837806',
+      avatar: '/assets/souvick_dp.jpg',
       emoji: '👨‍💻',
     },
     {
@@ -23,7 +23,7 @@ const About = () => {
       role: 'Content Creator',
       description:
         'Curriculum expert who designs clear, exam-focused and project-driven learning materials.',
-      avatar: 'https://www.facebook.com/photo/?fbid=961635126159564&set=a.105478485108570',
+      avatar: '/assets/surajit_dp.jpg',
       emoji: '👩‍🏫',
     },
     {
@@ -31,7 +31,7 @@ const About = () => {
       role: 'Content Creator',
       description:
         'Semester Notes & Lectures Expert.',
-      avatar: '',
+      avatar: '/assets/tanmay_dp.jpeg',
       emoji: '👨‍🔬',
     },
     {
@@ -39,7 +39,7 @@ const About = () => {
       role: 'Graphics Designer & Editor',
       description:
         'Design awsome materials',
-      avatar: '/mnt/data/04dec392-a8e7-464d-a024-6ece30b7e88a.png',
+      avatar: '/assets/sribas-dp.jpeg',
       emoji: '👩‍💼',
     },
   ];
