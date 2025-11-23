@@ -38,10 +38,29 @@ export const notesData = [
     rating: 4.8,
     lastUpdated: "2025-11-25",
   },
+  {
+    id: 3,
+    title: "Basic Electrical Organizer for 1st sem students",
+    branch: "CSE",
+    semester: "1",
+    subject: "BEE Organizer",
+    description:
+      "1st Sem BEE Organizer for CSE Students and Specilization",
+    tags: ["Basic electrical", "Makaut", "Organizer", "1st sem", "cse"],
+    fileSize: "56.2 MB",
+    downloadUrl: "https://drive.google.com/drive/folders/1HapBbTChxd2Zx6XEXEkfn42nHeE7UE3Q",
+    previewUrl: "https://drive.google.com/drive/folders/1HapBbTChxd2Zx6XEXEkfn42nHeE7UE3Q",
+    thumbnail: "", // optional: add path to CSE thumbnail if you have one
+    uploadedBy: "CoreEngineers Team",
+    views: 12,
+    downloadCount: 8,
+    rating: 4.8,
+    lastUpdated: "2025-11-25",
+  },
 
   // ECE entry with thumbnail (uses uploaded image from project files)
   {
-    id: 3,
+    id: 4,
     title: "Digital Signal Processing-Suggestion",
     branch: "ECE",
     semester: "5",
@@ -63,7 +82,7 @@ export const notesData = [
 
   // EE entry with thumbnail (re-using the same uploaded image; replace with EE-specific image later if available)
   {
-    id: 4,
+    id: 5,
     title: "Circuit Theory & Network Analysis",
     branch: "EE",
     semester: "2",
