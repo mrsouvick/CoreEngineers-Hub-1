@@ -39,7 +39,7 @@ const Footer = ({ onPageChange = () => {} }) => {
               const email = e.target.elements.email?.value?.trim();
               if (!email) return;
               e.target.reset();
-              alert('Thanks — subscription recorded (demo).');
+              alert('Thanks — Chat with Admin 7551891749.');
             }}
             aria-label="Subscribe to newsletter"
           >
