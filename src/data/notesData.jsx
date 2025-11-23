@@ -28,7 +28,7 @@ export const notesData = [
     description:
       "1st Sem Math Organizer for CSE Students and Specilization",
     tags: ["math", "Makaut", "Organizer", "1st sem", "cse"],
-    fileSize: "46.2 MB",
+    fileSize: "13.9 MB",
     downloadUrl: "https://drive.google.com/file/d/1pzmpnLpzsyGeC0YxwpabAHxlfGyaOsYs/view?usp=sharing",
     previewUrl: "https://drive.google.com/file/d/1pzmpnLpzsyGeC0YxwpabAHxlfGyaOsYs/view?usp=sharing",
     thumbnail: "", // optional: add path to CSE thumbnail if you have one
@@ -63,7 +63,7 @@ export const notesData = [
 
   // EE entry with thumbnail (re-using the same uploaded image; replace with EE-specific image later if available)
   {
-    id: 3,
+    id: 4,
     title: "Circuit Theory & Network Analysis",
     branch: "EE",
     semester: "2",
