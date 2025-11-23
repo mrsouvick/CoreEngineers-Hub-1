@@ -19,10 +19,29 @@ export const notesData = [
     rating: 4.8,
     lastUpdated: "2025-11-25",
   },
+  {
+    id: 2,
+    title: "Mathematics IIA Organizer",
+    branch: "CSE",
+    semester: "1",
+    subject: "Mathematics IIA",
+    description:
+      "1st Sem Math Organizer for CSE Students and Specilization",
+    tags: ["math", "Makaut", "Organizer", "1st sem", "cse"],
+    fileSize: "46.2 MB",
+    downloadUrl: "https://drive.google.com/file/d/1pzmpnLpzsyGeC0YxwpabAHxlfGyaOsYs/view?usp=sharing",
+    previewUrl: "https://drive.google.com/file/d/1pzmpnLpzsyGeC0YxwpabAHxlfGyaOsYs/view?usp=sharing",
+    thumbnail: "", // optional: add path to CSE thumbnail if you have one
+    uploadedBy: "CoreEngineers Team",
+    views: 12,
+    downloadCount: 8,
+    rating: 4.8,
+    lastUpdated: "2025-11-25",
+  },
 
   // ECE entry with thumbnail (uses uploaded image from project files)
   {
-    id: 2,
+    id: 3,
     title: "Digital Signal Processing-Suggestion",
     branch: "ECE",
     semester: "5",
