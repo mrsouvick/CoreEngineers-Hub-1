@@ -27,7 +27,7 @@ const Contact = () => {
   const [error, setError] = useState(null);
 
   const contactMethods = [
-    { emoji: '📧', title: 'Email Us', details: 'coreengineers@gmail.com', description: 'Send us an email anytime' },
+    { emoji: '📧', title: 'Email Us', details: 'coreengineershub@gmail.com', description: 'Send us an email anytime' },
     
   ];
 
@@ -133,7 +133,7 @@ const Contact = () => {
                   <a href="https://www.youtube.com/@vickify-b6l/" target="_blank" rel="noopener noreferrer" className="social-link">YouTube</a>
               
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-                  <a href="mailto:coreengineers@gmail.com" className="social-link">Email</a>
+                  <a href="mailto:coreengineershub@gmail.com" className="social-link">Email</a>
                 </div>
               </div>
             </div>

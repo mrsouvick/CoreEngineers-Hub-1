@@ -95,7 +95,7 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
 
         <div className="nav-cta">
           <a
-            href="https://youtube.com/@CoreEngineersHub"
+            href="https://www.youtube.com/@vickify-b6l/"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-accent"
@@ -133,7 +133,7 @@ const Header = ({ currentPage = 'home', onPageChange = () => {} }) => {
             </nav>
 
             <a
-              href="https://youtube.com/@CoreEngineersHub"
+              href="https://www.youtube.com/@vickify-b6l/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-accent mobile-cta"

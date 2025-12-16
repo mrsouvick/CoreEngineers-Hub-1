@@ -64,7 +64,7 @@ const Footer = ({ onPageChange = () => {} }) => {
           <h4 className="footer-heading">Connect with us</h4>
 
           <div className="social-row" role="list" aria-label="Social links">
-            <a className="social social-youtube" href="https://youtube.com/@CoreEngineersHub" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="YouTube">
+            <a className="social social-youtube" href="https://www.youtube.com/@vickify-b6l/" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="YouTube">
               <svg viewBox="0 0 24 24" aria-hidden="true" className="social-icon"><path d="M23 7s-.2-1.6-.8-2.3c-.8-.9-1.7-.9-2.1-1C16.8 3 12 3 12 3s-4.8 0-7.9.7c-.4.1-1.3.1-2.1 1C1.2 5.4 1 7 1 7S0.8 9.1.8 11.2v1.6C.8 15.9 1 18 1 18s.2 1.6.8 2.3c.8.9 1.9.9 2.4 1 1.8.3 7 .7 7 .7s4.8 0 7.9-.7c.4-.1 1.3-.1 2.1-1 .6-.7.8-2.3.8-2.3s.2-2.1.2-4.3v-1.6C23.2 9.1 23 7 23 7z" /><path d="M9.5 15.2V8.8l6.1 3.2-6.1 3.2z" /></svg>
               <span className="social-label">YouTube</span>
             </a>
@@ -79,14 +79,14 @@ const Footer = ({ onPageChange = () => {} }) => {
               <span className="social-label">LinkedIn</span>
             </a>
 
-            <a className="social" href="mailto:coreengineers@gmail.com" aria-label="Email" role="listitem">
+            <a className="social" href="mailto:coreengineershub@gmail.com" aria-label="Email" role="listitem">
               <svg viewBox="0 0 24 24" aria-hidden="true" className="social-icon"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z" /></svg>
               <span className="social-label">Email</span>
             </a>
           </div>
 
           <address className="contact-block">
-            <div>Questions? <a href="mailto:coreengineers@gmail.com">coreengineers@gmail.com</a></div>
+            <div>Questions? <a href="mailto:coreengineers@gmail.com">coreengineershub@gmail.com</a></div>
             <div className="small-muted">Made with ❤️ for engineering students</div>
           </address>
         </div>
