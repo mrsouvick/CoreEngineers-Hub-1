@@ -27,9 +27,8 @@ const Contact = () => {
   const [error, setError] = useState(null);
 
   const contactMethods = [
-    { emoji: '📧', title: 'Email Us', details: 'contact@coreengineershub.com', description: 'Send us an email anytime' },
-    { emoji: '📞', title: 'Call Us', details: '+1 (555) 123-4567', description: 'Mon-Fri, 9am–6pm' },
-    { emoji: '📍', title: 'Visit Us', details: '123 Engineering Lane', description: 'Tech City, TC 12345' },
+    { emoji: '📧', title: 'Email Us', details: 'coreengineers@gmail.com', description: 'Send us an email anytime' },
+    
   ];
 
   const handleChange = (e) => {
@@ -131,10 +130,10 @@ const Contact = () => {
               <div className="social-section">
                 <h3>Follow Us</h3>
                 <div className="social-links">
-                  <a href="https://youtube.com/@CoreEngineersHub" target="_blank" rel="noopener noreferrer" className="social-link">YouTube</a>
-                  <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="social-link">GitHub</a>
+                  <a href="https://www.youtube.com/@vickify-b6l/" target="_blank" rel="noopener noreferrer" className="social-link">YouTube</a>
+              
                   <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">LinkedIn</a>
-                  <a href="mailto:contact@coreengineershub.com" className="social-link">Email</a>
+                  <a href="mailto:coreengineers@gmail.com" className="social-link">Email</a>
                 </div>
               </div>
             </div>
