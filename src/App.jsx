@@ -8,10 +8,10 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 
 // Popup Component
-import PopupImage from './components/PopupImage';
+
 
 // Your actual image inside public/assets/
-const POPUP_IMAGE_PATH = "/assets/pop-up.png";
+
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -35,12 +35,7 @@ function App() {
     <div className="App">
       <Header currentPage={currentPage} onPageChange={setCurrentPage} />
 
-      {/* Popup Image */}
-      <PopupImage 
-        image={POPUP_IMAGE_PATH}
-        delay={1500}  // show after 1.5 sec
-      />
-
+      
       <main>
         {renderPage()}
       </main>
