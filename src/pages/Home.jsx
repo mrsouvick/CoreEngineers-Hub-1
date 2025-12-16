@@ -76,7 +76,7 @@ const Home = ({ onPageChange }) => {
                 Explore Notes Library
               </button>
               <a 
-                href="https://youtube.com/@CoreEngineersHub"
+                href="https://www.youtube.com/@vickify-b6l/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
@@ -134,7 +134,7 @@ const Home = ({ onPageChange }) => {
                 Get Started Now
               </button>
               <a 
-                href="https://youtube.com/@CoreEngineersHub"
+                href="https://www.youtube.com/@vickify-b6l/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
