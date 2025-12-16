@@ -1,16 +1,40 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import NoteCard from '../components/NoteCard';
-import { notesData, branches, semesters } from '../data/notesData';
+import { notesData, branches, semesters, subjects, difficulties } from '../data/notesData';
+import './Notes.css';
 
 const Notes = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     branch: '',
     semester: '',
-    subject: ''
+    subject: '',
+    difficulty: ''
   });
   const [sortBy, setSortBy] = useState('newest');
+  const [viewMode, setViewMode] = useState('grid');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage, setItemsPerPage] = useState(8);
+  const [stats, setStats] = useState({
+    totalNotes: 0,
+    totalViews: 0,
+    totalDownloads: 0
+  });
 
+  // Initialize stats
+  useEffect(() => {
+    const totalNotes = notesData.length;
+    const totalViews = notesData.reduce((sum, note) => sum + (note.views || 0), 0);
+    const totalDownloads = notesData.reduce((sum, note) => sum + (note.downloadCount || 0), 0);
+    
+    setStats({
+      totalNotes,
+      totalViews,
+      totalDownloads
+    });
+  }, []);
+
+  // Filter and sort notes
   const filteredNotes = useMemo(() => {
     let filtered = [...notesData];
 
@@ -21,7 +45,8 @@ const Notes = () => {
         note.title.toLowerCase().includes(searchLower) ||
         note.description.toLowerCase().includes(searchLower) ||
         note.subject.toLowerCase().includes(searchLower) ||
-        note.tags.some(tag => tag.toLowerCase().includes(searchLower))
+        note.tags.some(tag => tag.toLowerCase().includes(searchLower)) ||
+        note.branch.toLowerCase().includes(searchLower)
       );
     }
 
@@ -42,6 +67,13 @@ const Notes = () => {
       );
     }
 
+    // Difficulty filter
+    if (filters.difficulty) {
+      filtered = filtered.filter(note => 
+        note.difficulty === filters.difficulty
+      );
+    }
+
     // Sort
     switch (sortBy) {
       case 'newest':
@@ -56,6 +88,9 @@ const Notes = () => {
       case 'rating':
         filtered.sort((a, b) => b.rating - a.rating);
         break;
+      case 'alphabetical':
+        filtered.sort((a, b) => a.title.localeCompare(b.title));
+        break;
       default:
         break;
     }
@@ -63,322 +98,447 @@ const Notes = () => {
     return filtered;
   }, [searchTerm, filters, sortBy]);
 
+  // Pagination
+  const totalPages = Math.ceil(filteredNotes.length / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedNotes = filteredNotes.slice(startIndex, endIndex);
+
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
+    setCurrentPage(1); // Reset to first page on filter change
+  };
+
+  const handleBranchQuickFilter = (branch) => {
+    setFilters(prev => ({ 
+      ...prev, 
+      branch: prev.branch === branch ? '' : branch 
+    }));
+    setCurrentPage(1);
   };
 
   const clearFilters = () => {
-    setFilters({ branch: '', semester: '', subject: '' });
+    setFilters({ branch: '', semester: '', subject: '', difficulty: '' });
     setSearchTerm('');
     setSortBy('newest');
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const formatNumber = (num) => {
+    if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M';
+    if (num >= 1000) return (num / 1000).toFixed(1) + 'K';
+    return num.toString();
+  };
+
+  const handleDownloadAll = () => {
+    // This would typically trigger a batch download
+    // For now, just show a message
+    alert('Batch download feature coming soon!');
   };
 
   return (
     <div className="notes-page">
-      <div className="container">
+      {/* Background Glow Effects */}
+      <div className="notes-glow-effect glow-1"></div>
+      <div className="notes-glow-effect glow-2"></div>
+      
+      <div className="notes-container">
         {/* Header */}
-        <div className="page-header">
-          <h1>Notes Library</h1>
-          <p>Access comprehensive study materials for all engineering branches and semesters. Download PDFs and enhance your learning.</p>
+        <header className="notes-header">
+          <div className="notes-badge">
+            <span className="notes-badge-dot"></span>
+            Engineering Study Materials
+          </div>
+          
+          <h1 className="notes-title">
+            <span className="gradient-text">Notes Library</span>
+          </h1>
+          
+          <p className="notes-subtitle">
+            Access comprehensive study materials for all engineering branches and semesters. 
+            Download PDFs, view previews, and enhance your learning experience.
+          </p>
+        </header>
+
+        {/* Stats Bar */}
+        <div className="notes-stats-bar">
+          <div className="stat-item">
+            <span className="stat-value">{formatNumber(stats.totalNotes)}</span>
+            <span className="stat-label">Notes Available</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-value">{formatNumber(stats.totalViews)}</span>
+            <span className="stat-label">Total Views</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-value">{formatNumber(stats.totalDownloads)}</span>
+            <span className="stat-label">Downloads</span>
+          </div>
+        </div>
+
+        {/* Branch Quick Filters */}
+        <div className="branch-quick-filters">
+          <h3 className="branch-filters-title">Browse by Branch</h3>
+          <div className="branch-filters-grid">
+            {branches.map(branch => (
+              <button
+                key={branch.value}
+                className={`branch-filter-btn ${filters.branch === branch.value ? 'active' : ''}`}
+                onClick={() => handleBranchQuickFilter(branch.value)}
+              >
+                <span className="branch-icon">{branch.icon}</span>
+                {branch.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Search and Filters */}
-        <div className="filters-card">
+        <section className="search-section">
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Search notes by title, subject, tags, or description..."
+              value={searchTerm}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1);
+              }}
+              className="search-input"
+            />
+            <span className="search-icon">🔍</span>
+            {searchTerm && (
+              <button 
+                className="search-clear"
+                onClick={() => setSearchTerm('')}
+                aria-label="Clear search"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
           <div className="filters-grid">
-            <div className="search-box">
-              <input
-                type="text"
-                placeholder="Search notes by title, subject, description, or tags..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="search-input"
-              />
-              <span className="search-icon">🔍</span>
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">🏫</span>
+                Branch
+              </label>
+              <select
+                value={filters.branch}
+                onChange={(e) => handleFilterChange('branch', e.target.value)}
+                className="filter-select"
+              >
+                <option value="">All Branches</option>
+                {branches.map(branch => (
+                  <option key={branch.value} value={branch.value}>
+                    {branch.label}
+                  </option>
+                ))}
+              </select>
             </div>
-            
-            <select
-              value={filters.branch}
-              onChange={(e) => handleFilterChange('branch', e.target.value)}
-              className="filter-select"
-            >
-              <option value="">All Branches</option>
-              {branches.map(branch => (
-                <option key={branch.value} value={branch.value}>{branch.label}</option>
-              ))}
-            </select>
 
-            <select
-              value={filters.semester}
-              onChange={(e) => handleFilterChange('semester', e.target.value)}
-              className="filter-select"
-            >
-              <option value="">All Semesters</option>
-              {semesters.map(sem => (
-                <option key={sem} value={sem}>Semester {sem}</option>
-              ))}
-            </select>
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">📚</span>
+                Semester
+              </label>
+              <select
+                value={filters.semester}
+                onChange={(e) => handleFilterChange('semester', e.target.value)}
+                className="filter-select"
+              >
+                <option value="">All Semesters</option>
+                {semesters.map(sem => (
+                  <option key={sem.value} value={sem.value}>
+                    {sem.label}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="filter-select"
-            >
-              <option value="newest">Newest First</option>
-              <option value="popular">Most Popular</option>
-              <option value="downloads">Most Downloads</option>
-              <option value="rating">Highest Rated</option>
-            </select>
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">📖</span>
+                Subject
+              </label>
+              <select
+                value={filters.subject}
+                onChange={(e) => handleFilterChange('subject', e.target.value)}
+                className="filter-select"
+              >
+                <option value="">All Subjects</option>
+                {subjects.map((subject, index) => (
+                  <option key={index} value={subject}>
+                    {subject}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">⚡</span>
+                Difficulty
+              </label>
+              <select
+                value={filters.difficulty}
+                onChange={(e) => handleFilterChange('difficulty', e.target.value)}
+                className="filter-select"
+              >
+                <option value="">All Levels</option>
+                {difficulties.map(diff => (
+                  <option key={diff.value} value={diff.value}>
+                    {diff.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="filter-group">
+              <label className="filter-label">
+                <span className="filter-icon">📊</span>
+                Sort By
+              </label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="filter-select"
+              >
+                <option value="newest">Newest First</option>
+                <option value="popular">Most Popular</option>
+                <option value="downloads">Most Downloads</option>
+                <option value="rating">Highest Rated</option>
+                <option value="alphabetical">A → Z</option>
+              </select>
+            </div>
           </div>
 
           {/* Active Filters */}
-          {(searchTerm || filters.branch || filters.semester || filters.subject) && (
-            <div className="active-filters">
-              <div className="filters-label">
-                <span>Active filters:</span>
+          {(searchTerm || filters.branch || filters.semester || filters.subject || filters.difficulty) && (
+            <div className="active-filters-container">
+              <h4 className="active-filters-title">Active Filters:</h4>
+              <div className="active-filters">
                 {searchTerm && (
-                  <span className="filter-tag">Search: "{searchTerm}"</span>
+                  <span className="filter-tag">
+                    Search: "{searchTerm}"
+                    <button 
+                      className="filter-remove"
+                      onClick={() => setSearchTerm('')}
+                      aria-label="Remove search filter"
+                    >
+                      ✕
+                    </button>
+                  </span>
                 )}
                 {filters.branch && (
                   <span className="filter-tag">
                     Branch: {branches.find(b => b.value === filters.branch)?.label}
+                    <button 
+                      className="filter-remove"
+                      onClick={() => handleFilterChange('branch', '')}
+                      aria-label="Remove branch filter"
+                    >
+                      ✕
+                    </button>
                   </span>
                 )}
                 {filters.semester && (
-                  <span className="filter-tag">Semester: {filters.semester}</span>
+                  <span className="filter-tag">
+                    Semester: {filters.semester}
+                    <button 
+                      className="filter-remove"
+                      onClick={() => handleFilterChange('semester', '')}
+                      aria-label="Remove semester filter"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                )}
+                {filters.subject && (
+                  <span className="filter-tag">
+                    Subject: {filters.subject}
+                    <button 
+                      className="filter-remove"
+                      onClick={() => handleFilterChange('subject', '')}
+                      aria-label="Remove subject filter"
+                    >
+                      ✕
+                    </button>
+                  </span>
+                )}
+                {filters.difficulty && (
+                  <span className="filter-tag">
+                    Difficulty: {filters.difficulty}
+                    <button 
+                      className="filter-remove"
+                      onClick={() => handleFilterChange('difficulty', '')}
+                      aria-label="Remove difficulty filter"
+                    >
+                      ✕
+                    </button>
+                  </span>
                 )}
               </div>
-              <button onClick={clearFilters} className="clear-filters">
-                Clear All
+              <button onClick={clearFilters} className="clear-filters-btn">
+                <span>🗑️</span>
+                Clear All Filters
               </button>
             </div>
           )}
-        </div>
+        </section>
 
-        {/* Results Info */}
+        {/* View Controls and Results Info */}
         <div className="results-info">
-          <p>
-            Showing <strong>{filteredNotes.length}</strong> notes
-            {searchTerm && (
-              <span> for "<strong>{searchTerm}</strong>"</span>
+          <div className="results-count">
+            Showing <span>{startIndex + 1}-{Math.min(endIndex, filteredNotes.length)}</span> of <span>{filteredNotes.length}</span> notes
+          </div>
+          
+          <div className="results-actions">
+            <div className="view-controls">
+              <div className="view-toggle">
+                <button 
+                  className={`view-btn ${viewMode === 'grid' ? 'active' : ''}`}
+                  onClick={() => setViewMode('grid')}
+                  aria-label="Grid view"
+                >
+                  ⏹️
+                </button>
+                <button 
+                  className={`view-btn ${viewMode === 'list' ? 'active' : ''}`}
+                  onClick={() => setViewMode('list')}
+                  aria-label="List view"
+                >
+                  📋
+                </button>
+              </div>
+              
+              <select 
+                value={itemsPerPage}
+                onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                className="sort-select"
+              >
+                <option value="8">8 per page</option>
+                <option value="12">12 per page</option>
+                <option value="16">16 per page</option>
+                <option value="24">24 per page</option>
+              </select>
+            </div>
+            
+            {filteredNotes.length > 0 && (
+              <button onClick={handleDownloadAll} className="download-all-btn">
+                <span>📦</span>
+                Download All
+              </button>
             )}
-          </p>
+          </div>
         </div>
 
-        {/* Notes Grid */}
-        <div className="notes-grid">
-          {filteredNotes.map(note => (
-            <NoteCard key={note.id} note={note} />
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {filteredNotes.length === 0 && (
+        {/* Notes Grid/List */}
+        {paginatedNotes.length > 0 ? (
+          viewMode === 'grid' ? (
+            <div className="notes-grid">
+              {paginatedNotes.map(note => (
+                <NoteCard key={note.id} note={note} viewMode="grid" />
+              ))}
+            </div>
+          ) : (
+            <div className="notes-list">
+              {paginatedNotes.map(note => (
+                <NoteCard key={note.id} note={note} viewMode="list" />
+              ))}
+            </div>
+          )
+        ) : (
           <div className="empty-state">
             <div className="empty-icon">📚</div>
-            <h3>No notes found</h3>
-            <p>
-              {searchTerm || filters.branch || filters.semester || filters.subject
+            <h3 className="empty-title">No notes found</h3>
+            <p className="empty-message">
+              {searchTerm || filters.branch || filters.semester || filters.subject || filters.difficulty
                 ? 'Try adjusting your search or filters to find what you\'re looking for.'
                 : 'No notes have been uploaded yet. Check back soon!'
               }
             </p>
-            {(searchTerm || filters.branch || filters.semester || filters.subject) && (
+            {(searchTerm || filters.branch || filters.semester || filters.subject || filters.difficulty) && (
               <button onClick={clearFilters} className="btn btn-primary">
                 Clear All Filters
               </button>
             )}
+            <div className="empty-suggestions">
+              <span className="empty-suggestion" onClick={() => handleBranchQuickFilter('CSE')}>
+                Try CSE Notes
+              </span>
+              <span className="empty-suggestion" onClick={() => setSortBy('popular')}>
+                Most Popular
+              </span>
+              <span className="empty-suggestion" onClick={clearFilters}>
+                Show All Notes
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="pagination">
+            <button
+              className="pagination-btn"
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              aria-label="Previous page"
+            >
+              ←
+            </button>
+            
+            {[...Array(totalPages)].map((_, index) => {
+              const page = index + 1;
+              
+              // Show first page, last page, current page, and pages around current
+              if (
+                page === 1 ||
+                page === totalPages ||
+                (page >= currentPage - 1 && page <= currentPage + 1)
+              ) {
+                return (
+                  <button
+                    key={page}
+                    className={`pagination-btn ${page === currentPage ? 'active' : ''}`}
+                    onClick={() => handlePageChange(page)}
+                    aria-label={`Page ${page}`}
+                    aria-current={page === currentPage ? 'page' : undefined}
+                  >
+                    {page}
+                  </button>
+                );
+              }
+              
+              // Show ellipsis
+              if (
+                (page === currentPage - 2 && currentPage > 3) ||
+                (page === currentPage + 2 && currentPage < totalPages - 2)
+              ) {
+                return <span key={`dots-${page}`} className="pagination-dots">...</span>;
+              }
+              
+              return null;
+            })}
+            
+            <button
+              className="pagination-btn"
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              aria-label="Next page"
+            >
+              →
+            </button>
           </div>
         )}
       </div>
-
-      <style jsx>{`
-        .notes-page {
-          min-height: 100vh;
-          background: var(--page-bg);
-          padding: 2rem 0;
-        }
-
-        .page-header {
-          text-align: center;
-          margin-bottom: 3rem;
-        }
-
-        .page-header h1 {
-          font-size: 3rem;
-          margin-bottom: 1rem;
-        }
-
-        .page-header p {
-          font-size: 1.125rem;
-          color: var(--gray-600);
-          max-width: 600px;
-          margin: 0 auto;
-          line-height: 1.6;
-        }
-
-        .filters-card {
-          background: var(--surface);
-          border-radius: 1rem;
-          padding: 1.5rem;
-          box-shadow: var(--shadow-base);
-          border: 1px solid var(--gray-200);
-          margin-bottom: 2rem;
-        }
-
-        .filters-grid {
-          display: grid;
-          grid-template-columns: 2fr 1fr 1fr 1fr;
-          gap: 1rem;
-        }
-
-        .search-box {
-          position: relative;
-        }
-
-        .search-input {
-          width: 100%;
-          padding: 0.75rem 1rem 0.75rem 2.5rem;
-          border: 1px solid var(--gray-300);
-          border-radius: 0.75rem;
-          font-size: 1rem;
-          transition: all 0.3s ease;
-        }
-
-        .search-input:focus {
-          outline: none;
-          border-color: var(--primary-500);
-          box-shadow: 0 0 0 3px var(--primary-100);
-        }
-
-        .search-icon {
-          position: absolute;
-          left: 0.75rem;
-          top: 50%;
-          transform: translateY(-50%);
-          color: var(--gray-400);
-        }
-
-        .filter-select {
-          padding: 0.75rem 1rem;
-          border: 1px solid var(--gray-300);
-          border-radius: 0.75rem;
-          font-size: 1rem;
-          background: white;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-
-        .filter-select:focus {
-          outline: none;
-          border-color: var(--primary-500);
-          box-shadow: 0 0 0 3px var(--primary-100);
-        }
-
-        .active-filters {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          margin-top: 1rem;
-          padding-top: 1rem;
-          border-top: 1px solid var(--gray-200);
-        }
-
-        .filters-label {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          font-size: 0.875rem;
-          color: var(--gray-600);
-        }
-
-        .filter-tag {
-          background: var(--primary-100);
-          color: var(--primary-800);
-          padding: 0.25rem 0.5rem;
-          border-radius: 0.5rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-        }
-
-        .clear-filters {
-          background: none;
-          border: none;
-          color: var(--primary-600);
-          font-weight: 500;
-          cursor: pointer;
-          font-size: 0.875rem;
-        }
-
-        .clear-filters:hover {
-          color: var(--primary-700);
-        }
-
-        .results-info {
-          margin-bottom: 1.5rem;
-        }
-
-        .results-info p {
-          color: var(--gray-600);
-        }
-
-        .notes-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-          gap: 1.5rem;
-        }
-
-        .empty-state {
-          text-align: center;
-          padding: 4rem 2rem;
-          background: var(--surface);
-          border-radius: 1rem;
-          border: 1px solid var(--gray-200);
-        }
-
-        .empty-icon {
-          font-size: 4rem;
-          margin-bottom: 1rem;
-        }
-
-        .empty-state h3 {
-          margin-bottom: 1rem;
-          color: var(--gray-900);
-        }
-
-        .empty-state p {
-          color: var(--gray-600);
-          margin-bottom: 2rem;
-          max-width: 400px;
-          margin-left: auto;
-          margin-right: auto;
-        }
-
-        @media (max-width: 1024px) {
-          .filters-grid {
-            grid-template-columns: 1fr 1fr;
-          }
-        }
-
-        @media (max-width: 768px) {
-          .filters-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .notes-grid {
-            grid-template-columns: 1fr;
-          }
-
-          .page-header h1 {
-            font-size: 2rem;
-          }
-
-          .active-filters {
-            flex-direction: column;
-            gap: 1rem;
-            align-items: flex-start;
-          }
-        }
-      `}</style>
     </div>
   );
 };
