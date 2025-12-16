@@ -97,7 +97,7 @@ const About = () => {
                 Explore Resources
               </a>
               <a
-                href="https://youtube.com/@CoreEngineersHub"
+                href="https://www.youtube.com/@vickify-b6l/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-secondary"
@@ -211,7 +211,7 @@ const About = () => {
           <div className="cta-actions">
             <a href="#notes" className="btn btn-primary">Explore Resources</a>
             <a
-              href="https://youtube.com/@CoreEngineersHub"
+              href="https://www.youtube.com/@vickify-b6l/"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
